@@ -8,9 +8,6 @@ ENV OLLAMA_HOST=0.0.0.0
 # Expose the necessary port
 EXPOSE 11434
 
-# Create a volume for Ollama configuration and data
-VOLUME ["/root/.ollama"]
-
 # Set the working directory (optional, based on your usage)
 WORKDIR /code
 
