@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - 11434:11434
+    volumes:
+      - .:/code
+      - ./ollama/ollama:/root/.ollama
+    container_name: ollama5
+    pull_policy: always
+    tty: true
+    restart: always
+    environment:
+      - OLLAMA_KEEP_ALIVE=24h
+      - OLLAMA_HOST=0.0.0.0
+    entrypoint: ["/bin/sh", "-c", "ollama serve & sleep 10 && ollama run llama3.2:1b"]
+    
+
+  nestjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    container_name: nestjs1
+    restart: always
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - ollama
