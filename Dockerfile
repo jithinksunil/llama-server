@@ -5,4 +5,4 @@ FROM ollama/ollama
 EXPOSE 11434
 
 # Start the NestJS application
-ENTRYPOINT ["/bin/sh", "-c", "ollama serve"]
+ENTRYPOINT ["/bin/sh", "-c", "ollama serve & sleep 10 && ollama run llama3.2:1b"]
